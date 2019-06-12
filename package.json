@@ -1,0 +1,24 @@
+{
+  "name": "create-admin",
+  "version": "1.0.0",
+  "description": "create admin ",
+  "main": "index.js",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "commander": "^2.20.0",
+    "cross-spawn": "^6.0.5",
+    "download-git-repo": "^2.0.0",
+    "inquirer": "^6.3.1",
+    "node-cmd": "^3.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "create-admin": "./bin/create-admin.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
