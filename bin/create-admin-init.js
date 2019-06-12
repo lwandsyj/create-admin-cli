@@ -37,9 +37,6 @@ if(!projectName){
 
 let fullPath=path.join(currentPath,projectName);
 
-
-
-
 if(fs.existsSync(fullPath)){
     console.log()
     console.log(`${chalk.red(`error:已存在名为${projectName}的项目!`)}`);
