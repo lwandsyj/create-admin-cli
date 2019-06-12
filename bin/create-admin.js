@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 let program = require('commander');
 
 let config = require('../package.json');
