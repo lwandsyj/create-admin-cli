@@ -9,7 +9,9 @@ let chalk=require('chalk');
 let downLoad=require('download-git-repo')
 let spawn=require('cross-spawn')
 const execSync = require('child_process').exec;
-const cmd=require('node-cmd')
+const cmd=require('node-cmd');
+let ora=require('ora')
+
 let currentPath=process.cwd();
 
 commander.usage('init [projectName]')
@@ -51,8 +53,11 @@ if(fs.existsSync(fullPath)){
 }
 console.log('开始创建项目....')
 console.log()
+const spinner=ora('downloading template');
+spinner.start()
 let gitUrl='direct:https://github.com/lwandsyj/vue-admin-cli.git';
 downLoad(gitUrl,fullPath,{clone:true},(err)=>{
+    spinner.stop()
     if(err){
         console.log(`${chalk.red(`error:${err.message}`)}`)
         process.exit()

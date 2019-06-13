@@ -9,7 +9,8 @@
     "cross-spawn": "^6.0.5",
     "download-git-repo": "^2.0.0",
     "inquirer": "^6.3.1",
-    "node-cmd": "^3.0.0"
+    "node-cmd": "^3.0.0",
+    "ora": "^3.4.0"
   },
   "devDependencies": {},
   "scripts": {
