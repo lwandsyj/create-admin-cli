@@ -1,0 +1,130 @@
+<template>
+    <div>
+        <Collapse value="1">
+            <Panel name="1">
+                搜索
+                <div slot="content">
+                    <Form ref="searchForm" :model="search" :label-width="100" style="display: flex">
+                        <FormItem label="用户名称：">
+                            <Input v-model="search.name" placeholder="请输入用户名称"></Input>
+                        </FormItem>
+                        <div style="margin-left: 12px;">
+                            <Button type="primary" icon="ios-search" @click="onSearch">搜索</Button>
+                            <Button type="default" @click="onReset">重置</Button>
+                        </div>
+                    </Form>
+                </div>
+            </Panel>
+        </Collapse>
+        <Card style="margin-top:12px; " title="筛选列表">
+            <Table :columnsConfig="configs" :data="tableData" :total="total" :page="page" :size="size"
+                   @handlePageChange="handlePageChange" @handleSizeChange="handleSizeChange">
+                <div slot="left">
+                    <slot></slot>
+                </div>
+            </Table>
+        </Card>
+    </div>
+</template>
+<script>/* eslint-disable */
+import Table from '{{pathTable}}/components/table.vue'
+import listConfig from './listConfig'
+import ListMixin from '{{pathMixin}}/mixins/list'
+import Service from '{{pathService}}/services/{{serviceName}}.service'
+export default {
+    components: {
+        Table
+    },
+    mixins: [ListMixin],
+    data(){
+        return {
+            search:{
+                name:''
+            },
+            columns: listConfig
+        }
+    },
+    computed: {
+        configs(){
+            return Object.assign({}, this.columns, {
+                operation: {
+                    type: 'action',
+                    key: 'action',
+                    title: '操作',
+                    width: 180,
+                    align: 'center',
+                    checked: true,
+                    render: (h, params) => {
+                        return h('div', [
+                            h('Button', {
+                                props: {
+                                    type: 'info',
+                                },
+                                style: {
+                                    marginRight: '5px'
+                                },
+                                on: {
+                                    click: () => {
+                                        this.editRow(params.row);
+                                    }
+                                }
+                            }, '编辑'),
+                            h('Button', {
+                                props: {
+                                    type: 'error',
+                                },
+                                on: {
+                                    click: () => {
+                                        this.delRow(params.row.id)
+                                    }
+                                }
+                            }, '删除')
+                        ]);
+                    }
+                }
+            })
+        }
+    },
+    methods: {
+        getList(){
+            let param = {
+                page: this.page,
+                size: this.size
+            };
+            if (this.search.name) {
+                param.search = this.search.name;
+            }
+            Service.get{{serviceName}}List(param).then(res => {
+                this.total = res.count;
+                this.tableData = res.list;
+            })
+        },
+        delRow(id){
+            this.$Modal.confirm({
+                title: '提醒',
+                content: '确定要删除该条记录吗?',
+                onOK: () => {
+                    Service.del{{serviceName}}(id).then(res => {
+                        this.$Message.success('删除成功!');
+                        this.page = 1;
+                        this.getList()
+                    })
+                }
+            })
+        },
+        onSearch(){
+            this.page=1;
+            this.getList();
+        },
+        onReset(){
+            this.search={name:''}
+        },
+        editRow(row){
+            this.$emit('onEditRow',row)
+        }
+    },
+    created(){
+        this.getList();
+    }
+}
+</script>

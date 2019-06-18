@@ -1,0 +1,23 @@
+import axios from '../util/axios'
+const LIST = '/api/users/users/'
+const ADD = ''
+const EDIT = ''
+const DEL = (id) => `/api/users/users/${id}/delete/`
+const INFO = (id) => ``
+export default {
+    get{{serviceName}}List (params = {}) {
+        return axios.get('/api/users/users/', {params})
+    },
+    get{{serviceName}}Info (id, params = {}) {
+        return axios.get(INFO(id), {params})
+    },
+    del{{serviceName}} (id, param = {}) {
+        return axios.post(`/api/users/users/${id}/delete/`, param)
+    },
+    add{{serviceName}} (param={}){
+        return axios.post(`/api/users/users/${id}/delete/`, param)
+    },
+    editUser (id, param = {}) {
+        return axios.post(EDIT, param)
+    }
+}

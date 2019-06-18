@@ -63,4 +63,20 @@ if(fs.existsSync(fullModulePath)){
     console.log(`${chalk.red(`error:要创建名为${moduleName}的模块已存在，不允许相同名称的模块`)}`)
     process.exit()
 }
+console.log('开始读取模板。。。')
+if(!commander.single){
+    let temDir=path.join(__dirname,'../templates/views/total');
+    let addTemplate=path.join(temDir,'./add.template.html');
+    let indexTemplate=path.join(temDir,'./index.template.html');
+    let listTemplate=path.join(temDir,'./list.template.html');
+    let listConfigTemplate=path.join(temDir,'./listConfig.template.js');
+    let serviceTemplate=path.join(temDir,'./service.template.js')
+    //首先创建module目录
+    let serviceName=moduleName.slice(0,1).toUpperCase()+moduleName.slice(1);
+    console.log('创建模块目录')
+    fs.mkdirSync(fullModulePath)
+    console.log('模块目录创建成功')
+    console.log('开始读取add.template')
+    let addTmp= fs.readFileSync(addTemplate)
+}
 
