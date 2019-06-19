@@ -27,10 +27,10 @@
     </div>
 </template>
 <script>/* eslint-disable */
-import Table from '{{pathTable}}/components/table.vue'
+import Table from '../../components/table.vue'
 import listConfig from './listConfig'
-import ListMixin from '{{pathMixin}}/mixins/list'
-import Service from '{{pathService}}/services/{{serviceName}}.service'
+import ListMixin from '../../mixins/list'
+import Service from '../../services/{{serviceName}}.service'
 export default {
     components: {
         Table
@@ -40,8 +40,7 @@ export default {
         return {
             search:{
                 name:''
-            },
-            columns: listConfig
+            }
         }
     },
     computed: {

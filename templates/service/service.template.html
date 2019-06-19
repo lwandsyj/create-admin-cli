@@ -6,16 +6,16 @@ const DEL = (id) => `/api/users/users/${id}/delete/`
 const INFO = (id) => ``
 export default {
     get{{serviceName}}List (params = {}) {
-        return axios.get('/api/users/users/', {params})
+        return axios.get(LIST, {params})
     },
     get{{serviceName}}Info (id, params = {}) {
         return axios.get(INFO(id), {params})
     },
     del{{serviceName}} (id, param = {}) {
-        return axios.post(`/api/users/users/${id}/delete/`, param)
+        return axios.post(DEL(id), param)
     },
     add{{serviceName}} (param={}){
-        return axios.post(`/api/users/users/${id}/delete/`, param)
+        return axios.post(ADD, param)
     },
     editUser (id, param = {}) {
         return axios.post(EDIT, param)

@@ -1,0 +1,36 @@
+<template>
+    <div>
+        <div class="crumbs">
+            <Breadcrumb>
+                <BreadcrumbItem to="/">首页</BreadcrumbItem>
+                <BreadcrumbItem>系统管理</BreadcrumbItem>
+                <BreadcrumbItem>用户管理</BreadcrumbItem>
+            </Breadcrumb>
+        </div>
+        <list @onEditRow="onEditRow">
+            <Button type="primary" @click="onAddUser">添加用户</Button>
+        </list>
+        <Add :visible.sync="visible" :type="type"></Add>
+    </div>
+</template>
+<script>/* eslint-disable */
+import List from './list.vue'
+export default {
+    data(){
+        return {
+
+        }
+    },
+    methods: {
+        onAddUser(){
+
+        },
+        onEditRow(row){
+
+        }
+    },
+    components: {
+        List
+    }
+}
+</script>
