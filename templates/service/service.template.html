@@ -17,7 +17,7 @@ export default {
     add{{serviceName}} (param={}){
         return axios.post(ADD, param)
     },
-    editUser (id, param = {}) {
+    edit{{serviceName}} (id, param = {}) {
         return axios.post(EDIT, param)
     }
 }

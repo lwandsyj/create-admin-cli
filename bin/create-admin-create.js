@@ -8,11 +8,16 @@ let fs = require('fs');
 let chalk = require('chalk');
 let create = require('../lib/create')
 commander.usage('create [moduleName]', '创建新模块')
-    .option('-s,--single', '添加编辑独立于列表页')
-    .option('-e,--editor', '依赖于富文本编辑器')
-    .option('-m,--codemirror', '依赖于代码编辑器')
-    .option('-c,--checkbox', '依赖于checkbox')
-    .option('-r', '--radio', '依赖于radio')
+    .option('-i,--independent', '添加编辑独立于列表页')
+    .option('-a,--drawer','添加编辑基于drawer')
+    .option('-d,--date', '表单依赖于富文本编辑器')
+    .option('-e,--edit', '表单依赖于富文本编辑器')
+    .option('-m,--codemirror', '表单依赖于代码编辑器')
+    .option('-c,--checkbox', '表单依赖于checkbox')
+    .option('-r,--radio', '表单依赖于radio')
+    .option('-w,--switch', '表单依赖于switch')
+    .option('-l,--slider', '表单依赖于slider')
+    .option('-s,--select', '表单依赖于select')
 
 commander.parse(process.argv)
 let argvs = process.argv.slice(2);
@@ -67,5 +72,18 @@ let data = {}, options = {};
 let serviceName = moduleName.slice(0, 1).toUpperCase() + moduleName.slice(1)
 data.serviceName = serviceName;
 data.moduleName = moduleName;
+if (commander.independent) {
+    options.single = 'single'
+} else {
+    options.single = 'total'
+}
+if(commander.drawer){
+    drawer.drawer=commander.drawer
+}
+['date','edit','codemirror','select','checkbox','slider','switch','radio'].forEach(item=>{
+    if(commander[item]){
+        data[item]=true;
+    }
+})
 create(fullModulePath, srcPath, data, options)
 
